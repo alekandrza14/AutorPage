@@ -1,6 +1,6 @@
 // Заполните контакты и ссылки. Пути к изображениям — относительно папки сайта.
 window.SITE_CONFIG = {
-  title: 'Unauticna Community Enterteamed',
+  title: 'Unauticna Community EnterteamedA',
   description: 'Мы создаём игры, инструменты для Unity и языки программирования. Здесь собраны наши проекты и ассеты.',
   contacts: { name: 'Александр Забродин Максимович', email: 'alekandrza14@gmail.com', phone: '+7 (908) 702 94-62' },
   projects: [
