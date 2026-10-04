@@ -2,11 +2,9 @@
 window.SITE_CONFIG = {
   title: 'Unauticna Community Enterteamed',
   description: 'Мы создаём игры, инструменты для Unity и языки программирования. Здесь собраны наши проекты и ассеты.',
-  contacts: { name: 'Александр Забродин Максимович', email: '', phone: '' },
+  contacts: { name: 'Александр Забродин Максимович', email: 'alekandrza14@gmail.com', phone: '+7 (908) 702 94-62' },
   projects: [
-    { name: 'Unauticna', type: 'Игра', description: 'Песочница и приключения.', image: '', url: '' },
-    { name: 'CSP Link', type: 'Инструменты Unity', description: 'Инструменты для работы со скриптами в Unity.', image: '', url: '' },
-    { name: 'MyEngine', type: 'Разработка', description: 'Эксперименты с собственными инструментами разработки.', image: '', url: '' }
+    { name: 'Cave Voxel', type: 'Игра', description: 'тип : ассеты для дизайнеров\n это 3 мерные пиксельные текстуры с модельками', image: 'CaveVoxel', url: 'https://assetstore.unity.com/preview/326603/1097468' }
   ],
-  accounts: [{ name: 'alekandrza14', url: 'https://github.com/alekandrza14', image: '' }]
+  accounts: [{ name: 'alekandrza14', url: 'https://github.com/alekandrza14', image: '' },{ name: 'undertalesub', url: 'https://github.com/undertalesub', image: '' }]
 };
