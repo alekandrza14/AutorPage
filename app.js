@@ -1,11 +1,135 @@
 const config = window.SITE_CONFIG;
 const page = document.body.dataset.page;
-const el = (tag, text, className) => {const node = document.createElement(tag);if(text)node.textContent=text;if(className)node.className=className;return node;};
-function safeUrl(value){try{const url=new URL(value,location.href);return ['https:','http:'].includes(url.protocol)?url.href:null;}catch{return null;}}
-document.querySelector('.brand').textContent=config.title;
-document.querySelector('footer').textContent='эта информация страница автора где выможете увидеть другие ассеты автора и репзитории узнать о политике компании получить контактную инфомацию';
-function cover(item){const box=el('div',null,'cover');if(item.image){const img=el('img');img.src=item.image;img.alt=item.name;box.append(img);}else{box.append(el('span',item.name.split(/\s+/).map(x=>x[0]).join('').slice(0,3).toUpperCase(),'initial'));}return box;}
-function card(item,account=false){const article=el('article',null,'card');article.append(cover(item));const content=el('div',null,'card-content');if(item.type)content.append(el('span',item.type,'tag'));content.append(el('h3',item.name));if(item.description)content.append(el('p',item.description));const url=item.url&&safeUrl(item.url);if(url){const a=el('a',account?'Открыть GitHub':'Открыть проект','link');a.href=url;a.target='_blank';a.rel='noopener noreferrer';content.append(a);}else{content.append(el('p','Ссылка будет добавлена','muted'));}article.append(content);return article;}
-if(page==='home'){document.querySelector('.intro').textContent=config.description;config.projects.forEach(item=>document.querySelector('.grid').append(card(item)));const contacts=document.querySelector('#contact-list');for(const [key,label] of [['name','ФИО'],['email','Почта'],['phone','Телефон']]){const value=config.contacts[key];if(!value)continue;const row=el('div',null,'contact');const detail=el('span');detail.append(el('small',label),el('span',value));const button=el('button','Скопировать','copy');button.type='button';button.setAttribute('aria-label','Скопировать: '+label);button.addEventListener('click',async()=>{try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(value);}else{const field=el('textarea');field.value=value;field.style.position='fixed';field.style.opacity='0';document.body.append(field);field.select();const copied=document.execCommand('copy');field.remove();if(!copied)throw Error();}notify('Скопировано');}catch{notify('Не удалось скопировать. Выделите текст вручную.');}});row.append(detail,button);contacts.append(row);}}
-if(page==='github')config.accounts.forEach(item=>document.querySelector('.grid').append(card(item,true)));
-let timer;function notify(message){const box=document.querySelector('#notice');box.textContent=message;clearTimeout(timer);timer=setTimeout(()=>box.textContent='',3000);}
+
+const el = (tag, text, className) => {
+  const node = document.createElement(tag);
+  if (text) node.textContent = text;
+  if (className) node.className = className;
+  return node;
+};
+
+function safeUrl(value) {
+  try {
+    const url = new URL(value, location.href);
+    return ['https:', 'http:'].includes(url.protocol) ? url.href : null;
+  } catch {
+    return null;
+  }
+}
+
+document.querySelector('.brand').textContent = config.title;
+document.querySelector('footer').textContent =
+  "This publisher page lets you explore the author's other assets and repositories, learn about company policies, and find contact information.";
+
+function cover(item) {
+  const box = el('div', null, 'cover');
+
+  if (item.image) {
+    const img = el('img');
+    img.src = item.image;
+    img.alt = item.name;
+    box.append(img);
+  } else {
+    box.append(
+      el(
+        'span',
+        item.name.split(/\s+/).map(x => x[0]).join('').slice(0, 3).toUpperCase(),
+        'initial'
+      )
+    );
+  }
+
+  return box;
+}
+
+function card(item, account = false) {
+  const article = el('article', null, 'card');
+  article.append(cover(item));
+
+  const content = el('div', null, 'card-content');
+  if (item.type) content.append(el('span', item.type, 'tag'));
+  content.append(el('h3', item.name));
+  if (item.description) content.append(el('p', item.description));
+
+  const url = item.url && safeUrl(item.url);
+
+  if (url) {
+    const a = el('a', account ? 'Open GitHub' : 'Open project', 'link');
+    a.href = url;
+    a.target = '_blank';
+    a.rel = 'noopener noreferrer';
+    content.append(a);
+  } else {
+    content.append(el('p', 'Link coming soon', 'muted'));
+  }
+
+  article.append(content);
+  return article;
+}
+
+if (page === 'home') {
+  document.querySelector('.intro').textContent = config.description;
+  config.projects.forEach(item =>
+    document.querySelector('.grid').append(card(item))
+  );
+
+  const contacts = document.querySelector('#contact-list');
+
+  for (const [key, label] of [
+    ['name', 'Full name'],
+    ['email', 'Email'],
+    ['phone', 'Phone']
+  ]) {
+    const value = config.contacts[key];
+    if (!value) continue;
+
+    const row = el('div', null, 'contact');
+    const detail = el('span');
+    detail.append(el('small', label), el('span', value));
+
+    const button = el('button', 'Copy', 'copy');
+    button.type = 'button';
+    button.setAttribute('aria-label', 'Copy: ' + label);
+
+    button.addEventListener('click', async () => {
+      try {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(value);
+        } else {
+          const field = el('textarea');
+          field.value = value;
+          field.style.position = 'fixed';
+          field.style.opacity = '0';
+          document.body.append(field);
+          field.select();
+
+          const copied = document.execCommand('copy');
+          field.remove();
+          if (!copied) throw Error();
+        }
+
+        notify('Copied');
+      } catch {
+        notify('Unable to copy. Please select and copy the text manually.');
+      }
+    });
+
+    row.append(detail, button);
+    contacts.append(row);
+  }
+}
+
+if (page === 'github') {
+  config.accounts.forEach(item =>
+    document.querySelector('.grid').append(card(item, true))
+  );
+}
+
+let timer;
+
+function notify(message) {
+  const box = document.querySelector('#notice');
+  box.textContent = message;
+  clearTimeout(timer);
+  timer = setTimeout(() => box.textContent = '', 3000);
+}
