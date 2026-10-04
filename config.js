@@ -6,5 +6,5 @@ window.SITE_CONFIG = {
   projects: [
     { name: 'Cave Voxel', type: 'Игра', description: 'тип : ассеты для дизайнеров\n это 3 мерные пиксельные текстуры с модельками', image: 'assets/CaveVoxel.png', url: 'https://assetstore.unity.com/preview/326603/1097468' }
   ],
-  accounts: [{ name: 'alekandrza14', url: 'https://github.com/alekandrza14', image: '' },{ name: 'undertalesub', url: 'https://github.com/undertalesub', image: '' }]
+  accounts: [{ name: 'alekandrza14', url: 'https://github.com/alekandrza14', image: 'assets/autor.png' },{ name: 'undertalesub', url: 'https://github.com/undertalesub', image: 'assets/autor.png' }]
 };
