@@ -13,7 +13,7 @@ window.SITE_CONFIG = {
       type: 'Type : 3D Models',
       description: 'Stylized cave decorations with 3D textures and shaders.',
       image: 'assets/CaveVoxel.png',
-      url: 'https://assetstore.unity.com/preview/326603/1097468'
+      url: 'https://assetstore.unity.com/preview/326603/1506498'
     }
   ],
   accounts: [
